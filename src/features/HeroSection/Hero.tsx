@@ -7,7 +7,7 @@ const Hero = () => {
         Entrenamiento <br /> de hoy
       </h1>
       <div className="flex justify-center mt-[-5px]">
-        <button className="bg-indigo-900  w-7/10 max-w-[1024px] hover:bg-indigo-700 text-white p-3 text-sm rounded-full">
+        <button className="bg-indigo-900 max-w-[1024px] hover:bg-indigo-700 text-white p-3 text-sm rounded-full">
           Ir al entrenamiento de hoy {'->'}
         </button>
       </div>
