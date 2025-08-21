@@ -38,6 +38,9 @@ export default [
       ...reactHooks.configs.recommended.rules,
       ...tsPlugin.configs.recommended.rules,
 
+      'object-curly-spacing': 'off',
+      'space-in-parens': 'off',
+
       // Prettier integration
       'prettier/prettier': 'error',
 
