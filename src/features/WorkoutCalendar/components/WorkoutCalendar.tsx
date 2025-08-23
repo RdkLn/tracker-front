@@ -1,5 +1,5 @@
-import React from 'react';
-import InfoSvg from './../../assets/info.svg?react';
+import InfoSvg from 'assets/info.svg?react';
+import { getDaysTrained } from '../api/get-days-workedout';
 
 type DayEntry = {
   id: number;
@@ -9,25 +9,35 @@ type DayEntry = {
 };
 
 const WorkoutCalendar = () => {
+  let daysOfYear: DayEntry[] = [];
+  getDaysTrained(1).then(response => {
+    let entries = response.data;
+    for (let index = 0; index < entries.length; index++) {
+      const entry = entries[index];
+      daysOfYear.push({ id: index, date: entry, attended: true, restDay: false });
+    }
+    console.log('response: ', entries);
+  });
+
   //TODO: remove mock
   //FIXME: Arreglar la organizacion de dias de la semana
-  const daysOfYear: DayEntry[] = [
-    { id: 1, date: '01/01/2025', attended: true, restDay: false },
-    { id: 2, date: '02/01/2025', attended: true, restDay: false },
-    { id: 3, date: '03/01/2025', attended: false, restDay: true },
-    { id: 4, date: '04/01/2025', attended: true, restDay: true },
-    { id: 5, date: '05/01/2025', attended: true, restDay: false },
-    { id: 6, date: '06/01/2025', attended: false, restDay: false },
-    { id: 7, date: '07/01/2025', attended: false, restDay: true },
-    { id: 8, date: '08/01/2025', attended: true, restDay: false },
-    { id: 9, date: '09/01/2025', attended: true, restDay: false },
-    { id: 10, date: '10/01/2025', attended: true, restDay: false },
-    { id: 11, date: '11/01/2025', attended: false, restDay: true },
-    { id: 12, date: '12/01/2025', attended: true, restDay: false },
-    { id: 13, date: '13/01/2025', attended: true, restDay: false },
-    { id: 14, date: '14/01/2025', attended: true, restDay: true },
-    { id: 15, date: '15/01/2025', attended: false, restDay: false },
-  ];
+  // daysOfYear = [
+  //   { id: 1, date: '01/01/2025', attended: true, restDay: false },
+  //   { id: 2, date: '02/01/2025', attended: true, restDay: false },
+  //   { id: 3, date: '03/01/2025', attended: false, restDay: true },
+  //   { id: 4, date: '04/01/2025', attended: true, restDay: true },
+  //   { id: 5, date: '05/01/2025', attended: true, restDay: false },
+  //   { id: 6, date: '06/01/2025', attended: false, restDay: false },
+  //   { id: 7, date: '07/01/2025', attended: false, restDay: true },
+  //   { id: 8, date: '08/01/2025', attended: true, restDay: false },
+  //   { id: 9, date: '09/01/2025', attended: true, restDay: false },
+  //   { id: 10, date: '10/01/2025', attended: true, restDay: false },
+  //   { id: 11, date: '11/01/2025', attended: false, restDay: true },
+  //   { id: 12, date: '12/01/2025', attended: true, restDay: false },
+  //   { id: 13, date: '13/01/2025', attended: true, restDay: false },
+  //   { id: 14, date: '14/01/2025', attended: true, restDay: true },
+  //   { id: 15, date: '15/01/2025', attended: false, restDay: false },
+  // ];
   let daysTrainedCount = daysOfYear.filter(x => x.attended == true).length;
   return (
     <div className="flex flex-col ">

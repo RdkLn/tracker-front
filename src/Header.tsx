@@ -4,7 +4,7 @@ import DrawerSvg from './assets/drawer.svg?react';
 const Header = () => {
   return (
     <div className="bg-[#3e3e3e]">
-      <nav className="mx-auto max-w-7xl p-3 flex items-center justify-between lg:px-8">
+      <nav className="mx-auto  p-3 flex items-center justify-between lg:px-8">
         <div className="size-5 ">
           <DrawerSvg className="stroke-white "></DrawerSvg>
         </div>
