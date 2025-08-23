@@ -1,5 +1,6 @@
 import InfoSvg from 'assets/info.svg?react';
 import { getDaysTrained } from '../api/get-days-workedout';
+import { useEffect, useState } from 'react';
 
 type DayEntry = {
   id: number;
@@ -9,14 +10,19 @@ type DayEntry = {
 };
 
 const WorkoutCalendar = () => {
-  let daysOfYear: DayEntry[] = [];
-  getDaysTrained(1).then(response => {
-    let entries = response.data;
-    for (let index = 0; index < entries.length; index++) {
-      const entry = entries[index];
-      daysOfYear.push({ id: index, date: entry, attended: true, restDay: false });
-    }
-    console.log('response: ', entries);
+  const [calendarEntries, setCalendarEntries] = useState<DayEntry[]>([]);
+
+  useEffect(() => {
+    let daysOfYear: DayEntry[] = [];
+    //TODO: CAMBIAR para recoger el id usuario de otra parte
+    getDaysTrained(1).then(response => {
+      let entries = response.data;
+      for (let index = 0; index < entries.length; index++) {
+        const entry = entries[index];
+        daysOfYear.push({ id: index, date: entry, attended: true, restDay: false });
+      }
+      setCalendarEntries(daysOfYear);
+    });
   });
 
   //TODO: remove mock
@@ -38,13 +44,13 @@ const WorkoutCalendar = () => {
   //   { id: 14, date: '14/01/2025', attended: true, restDay: true },
   //   { id: 15, date: '15/01/2025', attended: false, restDay: false },
   // ];
-  let daysTrainedCount = daysOfYear.filter(x => x.attended == true).length;
+  let daysTrainedCount = calendarEntries.filter(x => x.attended == true).length;
   return (
     <div className="flex flex-col ">
       <h2 className="text-white ml-2 text-sm">
         {daysTrainedCount} Entrenamientos en el ultimo año
       </h2>
-      <CalendarGrid daysOfYear={daysOfYear} />
+      <CalendarGrid daysOfYear={calendarEntries} />
     </div>
   );
 };
