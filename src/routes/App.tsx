@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from './Header';
-import Hero from './features/HeroSection/Hero';
-import WorkoutCalendar from './features/WorkoutCalendar/components/WorkoutCalendar';
-import { WorkoutHistory } from './features/WorkoutHistory/WorkoutHistory';
+import Header from '../Header';
+import Hero from '../features/HeroSection/Hero';
+import WorkoutCalendar from '../features/WorkoutCalendar/components/WorkoutCalendar';
+import { WorkoutHistory } from '../features/WorkoutHistory/WorkoutHistory';
 
 const App = () => {
   return (

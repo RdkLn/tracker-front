@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const Hero = () => {
   return (
@@ -7,9 +8,12 @@ const Hero = () => {
         Entrenamiento <br /> de hoy
       </h1>
       <div className="flex justify-center mt-[-5px]">
-        <button className="bg-indigo-900 max-w-[1024px] hover:bg-indigo-700 text-white p-3 text-sm rounded-full">
+        <Link
+          to={'/Workout'}
+          className="bg-indigo-900 hover:bg-indigo-700 text-white p-3 text-sm rounded-full"
+        >
           Ir al entrenamiento de hoy {'->'}
-        </button>
+        </Link>
       </div>
     </div>
   );
