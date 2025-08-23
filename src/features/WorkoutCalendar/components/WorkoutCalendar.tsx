@@ -9,12 +9,13 @@ type DayEntry = {
   attended: boolean;
 };
 
+//FIXME: Arreglar la organizacion de dias de la semana
+//TODO: CAMBIAR para recoger el id usuario de otra parte
 const WorkoutCalendar = () => {
   const [calendarEntries, setCalendarEntries] = useState<DayEntry[]>([]);
 
   useEffect(() => {
     let daysOfYear: DayEntry[] = [];
-    //TODO: CAMBIAR para recoger el id usuario de otra parte
     getDaysTrained(1).then(response => {
       let entries = response.data;
       for (let index = 0; index < entries.length; index++) {
@@ -23,10 +24,9 @@ const WorkoutCalendar = () => {
       }
       setCalendarEntries(daysOfYear);
     });
-  });
+  }, []);
 
   //TODO: remove mock
-  //FIXME: Arreglar la organizacion de dias de la semana
   // daysOfYear = [
   //   { id: 1, date: '01/01/2025', attended: true, restDay: false },
   //   { id: 2, date: '02/01/2025', attended: true, restDay: false },
@@ -72,16 +72,13 @@ export const CalendarGrid = ({ daysOfYear }: { daysOfYear: DayEntry[] }) => {
 };
 
 export const CalendarEntry = ({ day }: { day: DayEntry }) => {
-  console.log(day);
-  if (day.restDay && day.attended) {
-    return <div className="size-2.5 m-0.5 rounded-xs bg-amber-400"></div>;
-  } else if (day.restDay) {
-    return <div className="size-2.5 m-0.5 rounded-xs bg-blue-400"></div>;
-  } else if (day.attended) {
-    return <div className="size-2.5 m-0.5 rounded-xs bg-green-400"></div>;
-  } else {
-    return <div className="size-2.5 m-0.5 rounded-xs bg-red-400"></div>;
-  }
+  const getColor = () => {
+    if (day.restDay && day.attended) return 'bg-amber-400';
+    if (day.restDay) return 'bg-blue-400';
+    if (day.attended) return 'bg-green-400';
+    return 'bg-red-400';
+  };
+  return <div className={`size-2.5 m-0.5 rounded-xs bg-red-400 ${getColor()}`}></div>;
 };
 
 export const CalendarEntryArray = ({ daysOfYear }: { daysOfYear: DayEntry[] }) => {
